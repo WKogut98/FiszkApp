@@ -10,44 +10,29 @@
         android:id="@+id/labelHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:text="Cześć!"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/inputUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/inputPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelHello" />
-
-    <EditText
-        android:id="@+id/inputPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="81dp"
-        android:ems="10"
-        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelHello" />
 
     <Button
         android:id="@+id/buttonLogIn"
@@ -55,10 +40,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
         android:layout_marginEnd="159dp"
-        android:layout_marginBottom="200dp"
-        android:text="Zaloguj Się"
+        android:layout_marginBottom="225dp"
+        android:text="Wejdź"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
+        android:text="Jak masz na imię?"
+        app:layout_constraintBottom_toTopOf="@+id/inputUsername"
+        app:layout_constraintTop_toBottomOf="@+id/labelHello"
+        tools:layout_editor_absoluteX="148dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
