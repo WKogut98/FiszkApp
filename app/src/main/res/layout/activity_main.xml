@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/labelHello"
+        android:id="@+id/labelWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -54,6 +54,6 @@
         android:text="Jak masz na imię?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelHello" />
+        app:layout_constraintTop_toBottomOf="@+id/labelWelcome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
