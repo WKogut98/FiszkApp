@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+//to powinno być MainActivity
 public class HomeScreenActivity extends AppCompatActivity {
     TextView labelWelcome;
     Bundle args;
