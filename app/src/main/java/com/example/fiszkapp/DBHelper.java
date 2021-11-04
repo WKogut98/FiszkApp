@@ -26,10 +26,10 @@ public class DBHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("create table if not exists "+table_names[0]+" ("+cols_user[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_user[1]+" TEXT,"+cols_user[2]+" NUMBER"+cols_user[3]+", NUMBER)"); //utworzenie tabeli user
+                +cols_user[1]+" TEXT,"+cols_user[2]+" INTEGER,"+cols_user[3]+" INTEGER)"); //utworzenie tabeli user
 
         db.execSQL("create table if not exists "+table_names[1]+" ("+cols_flashcard[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_flashcard[1]+" TEXT,"+cols_flashcard[2]+" TEXT"+cols_user[3]+", NUMBER"+cols_user[4]+", INTEGER)"); //utworzenie tabeli flashcard
+                +cols_flashcard[1]+" TEXT,"+cols_flashcard[2]+" TEXT"+cols_flashcard[3]+", NUMBER"+cols_flashcard[4]+", INTEGER)"); //utworzenie tabeli flashcard
 
         db.execSQL("create table if not exists "+table_names[2]+" ("+cols_collection[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +cols_collection[1]+" TEXT,"+cols_collection[2]+" INTEGER"+cols_collection[3]+", INTEGER)"); //utworzenie tabeli collection
@@ -62,14 +62,7 @@ public class DBHelper extends SQLiteOpenHelper
         contentValues.put(COL_3,experience);
         contentValues.put(COL_4,level);*/
         long insert=db.insert(table_name,null,contentValues);
-        if(insert==-1)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return insert != -1;
     }
     public Cursor getAllData(String table_name)
     {
