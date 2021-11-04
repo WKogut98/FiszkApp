@@ -23,10 +23,18 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper = new DBHelper(this);
+
+        Cursor cursor = dbHelper.getAllData("User");
+        if(cursor.moveToNext())//sprawdź czy użytkownik został dodany
+        {//jeśli tak to przejdź do HomeScreenActivity
+            String username = cursor.getString(1);
+            Intent toHomescreen = new Intent(MainActivity.this, HomeScreenActivity.class);
+            toHomescreen.putExtra("username", username);
+            startActivityForResult(toHomescreen, 0);
+        }
         buttonLogIn = (Button)findViewById(R.id.buttonLogIn);
         inputUsername = (EditText)findViewById(R.id.inputUsername);
-
-        dbHelper = new DBHelper(this);
         mDatabase = dbHelper.getWritableDatabase();
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
