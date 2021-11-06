@@ -9,14 +9,143 @@
         android:id="@+id/labelWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="191dp"
-        android:layout_marginTop="127dp"
-        android:layout_marginEnd="185dp"
-        android:layout_marginBottom="585dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Witaj!"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="100"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelLevel" />
+
+    <TextView
+        android:id="@+id/labelLevel"
+        android:layout_width="39dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="17dp"
+        android:text="POZ."
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBarExp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="127dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="18dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/textLevel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/labelWelcome"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="211dp"
+        android:layout_marginEnd="75dp"
+        android:text="pozostało: 9999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarExp" />
+
+    <Button
+        android:id="@+id/buttonNewFlashcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="137dp"
+        android:text="Nowa Fiszka"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textExp" />
+
+    <Button
+        android:id="@+id/buttonCollections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="122dp"
+        android:text="Twoje Kolekcje"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNewFlashcard" />
+
+    <Button
+        android:id="@+id/buttonStartLesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="40dp"
+        android:text="Rozpocznij Lekcję"
+        app:layout_constraintBottom_toTopOf="@+id/labelLastLesson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/labelLastLesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginEnd="158dp"
+        android:layout_marginBottom="15dp"
+        android:text="Ostatnia lekcja:"
+        app:layout_constraintBottom_toTopOf="@+id/textLastLesson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textLastLesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="16dp"
+        android:text="1 dzień, 26 min temu"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonBadges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="68dp"
+        android:text="Twoje Odznaki"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLessonHoistory"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCollections" />
+
+    <Button
+        android:id="@+id/buttonLessonHoistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="56dp"
+        android:text="Historia Lekcji"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartLesson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

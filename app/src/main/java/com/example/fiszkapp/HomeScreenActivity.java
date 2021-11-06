@@ -1,6 +1,10 @@
 package com.example.fiszkapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +13,61 @@ public class HomeScreenActivity extends AppCompatActivity {
     TextView labelWelcome;
     Bundle args;
     String username;
+    TextView textLevel;
+    TextView textExp;
+    ProgressBar progressBarExp;
+    Button buttonNewFlashcard;
+    Button buttonCollections;
+    Button buttonBadges;
+    Button buttonLessonHistory;
+    Button buttonStartLesson;
+    TextView textLastLesson;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_activity);
         labelWelcome = (TextView) findViewById(R.id.labelWelcome);
+        textLevel = (TextView)findViewById(R.id.textLevel);
+        textExp = (TextView)findViewById(R.id.textExp);
+        textLastLesson = (TextView)findViewById(R.id.textLastLesson);
+        progressBarExp = (ProgressBar)findViewById(R.id.progressBarExp);
+        buttonNewFlashcard = (Button)findViewById(R.id.buttonNewFlashcard);
+        buttonCollections = (Button)findViewById(R.id.buttonCollections);
+        buttonBadges = (Button)findViewById(R.id.buttonBadges);
+        buttonLessonHistory = (Button)findViewById(R.id.buttonLessonHoistory);
+        buttonStartLesson = (Button)findViewById(R.id.buttonStartLesson);
         args = getIntent().getExtras();
         username = args.getString("username");
         labelWelcome.setText("Witaj "+username+" !");
+
+        buttonNewFlashcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toNewFlashcard = new Intent(HomeScreenActivity.this, NewFlashcardActivity.class);
+                startActivityForResult(toNewFlashcard, 0);
+            }
+        });
+        buttonStartLesson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toLesson = new Intent(HomeScreenActivity.this, LessonActivity.class);
+                startActivityForResult(toLesson, 0);
+            }
+        });
+        buttonCollections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toCollections = new Intent(HomeScreenActivity.this, CollectionsActivity.class);
+                startActivityForResult(toCollections, 0);
+            }
+        });
+        buttonLessonHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toLessonHistory = new Intent(HomeScreenActivity.this, LessonHistoryActivity.class);
+                startActivityForResult(toLessonHistory, 0);
+            }
+        });
     }
 }

@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper
                 +cols_user[1]+" TEXT,"+cols_user[2]+" INTEGER,"+cols_user[3]+" INTEGER)"); //utworzenie tabeli user
 
         db.execSQL("create table if not exists "+table_names[1]+" ("+cols_flashcard[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_flashcard[1]+" TEXT,"+cols_flashcard[2]+" TEXT"+cols_flashcard[3]+", NUMBER"+cols_flashcard[4]+", INTEGER)"); //utworzenie tabeli flashcard
+                +cols_flashcard[1]+" TEXT,"+cols_flashcard[2]+" TEXT"+cols_flashcard[3]+", INTEGER"+cols_flashcard[4]+", INTEGER)"); //utworzenie tabeli flashcard
 
         db.execSQL("create table if not exists "+table_names[2]+" ("+cols_collection[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +cols_collection[1]+" TEXT,"+cols_collection[2]+" INTEGER"+cols_collection[3]+", INTEGER)"); //utworzenie tabeli collection

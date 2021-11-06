@@ -9,6 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FiszkApp">
+        <activity
+            android:name=".BadgesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewFlashcardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LessonHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LessonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CollectionsActivity"
+            android:exported="false" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
