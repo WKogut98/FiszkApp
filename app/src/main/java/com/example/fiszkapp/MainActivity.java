@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
             Intent toHomescreen = new Intent(MainActivity.this, HomeScreenActivity.class);
             toHomescreen.putExtra("username", username);
             startActivityForResult(toHomescreen, 0);
+            finish();
         }
         buttonLogIn = (Button)findViewById(R.id.buttonLogIn);
         inputUsername = (EditText)findViewById(R.id.inputUsername);
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity
                 contentValues.put(DBHelper.cols_user[2], 0);
                 contentValues.put(DBHelper.cols_user[3], 1);
                 boolean isInserted = dbHelper.insertData(DBHelper.table_names[0], contentValues);
-                if(isInserted==true)
+                if(isInserted)
                 {
                     Toast.makeText(MainActivity.this,"Dodano Użytkownika",Toast.LENGTH_SHORT).show();
                     Intent toHomescreen = new Intent(MainActivity.this, HomeScreenActivity.class);

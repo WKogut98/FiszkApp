@@ -1,6 +1,7 @@
 package com.example.fiszkapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,14 @@ public class HomeScreenActivity extends AppCompatActivity {
         args = getIntent().getExtras();
         username = args.getString("username");
         labelWelcome.setText("Witaj "+username+" !");
+
+        //weź dane użytkownika
+        DBHelper dbHelper = new DBHelper(this);
+        Cursor cursor = dbHelper.getAllData("user");
+        cursor.moveToNext();
+        //ustawienie poziomu na stronie głównej
+        int a = cursor.getInt(3);
+        textLevel.setText(String.valueOf(a));
 
         buttonNewFlashcard.setOnClickListener(new View.OnClickListener() {
             @Override
