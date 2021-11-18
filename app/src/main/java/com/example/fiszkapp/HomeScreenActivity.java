@@ -40,15 +40,19 @@ public class HomeScreenActivity extends AppCompatActivity {
         buttonStartLesson = (Button)findViewById(R.id.buttonStartLesson);
         args = getIntent().getExtras();
         username = args.getString("username");
-        labelWelcome.setText("Witaj "+username+" !");
+        labelWelcome.setText(username);
 
         //weź dane użytkownika
         DBHelper dbHelper = new DBHelper(this);
         Cursor cursor = dbHelper.getAllData("user");
         cursor.moveToNext();
         //ustawienie poziomu na stronie głównej
-        int a = cursor.getInt(3);
-        textLevel.setText(String.valueOf(a));
+        int level = cursor.getInt(3);
+        int exp = cursor.getInt(2);
+        textLevel.setText(String.valueOf(level));
+        int percentage = Experience.calculateExpFromCurrentLevel(exp,level)/Experience.calculateNeededExp(level)*100;
+        progressBarExp.setProgress(percentage);
+        textExp.setText("pozostało: "+ Experience.expToNextLevel(exp, level));
 
         buttonNewFlashcard.setOnClickListener(new View.OnClickListener() {
             @Override

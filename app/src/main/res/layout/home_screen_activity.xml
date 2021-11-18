@@ -39,26 +39,25 @@
     <ProgressBar
         android:id="@+id/progressBarExp"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="127dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="135dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="18dp"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/textLevel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/labelWelcome"
+        app:layout_constraintBottom_toTopOf="@+id/textExp"
+        app:layout_constraintEnd_toEndOf="@+id/textExp"
+        app:layout_constraintStart_toStartOf="@+id/textExp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textExp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="211dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="20dp"
         android:text="pozostało: 9999999"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textLevel"
+        app:layout_constraintStart_toEndOf="@+id/labelWelcome"
         app:layout_constraintTop_toBottomOf="@+id/progressBarExp" />
 
     <Button
