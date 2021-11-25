@@ -40,7 +40,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         buttonStartLesson = (Button)findViewById(R.id.buttonStartLesson);
         args = getIntent().getExtras();
         username = args.getString("username");
-        labelWelcome.setText(username);
+        labelWelcome.setText("Witaj, "+username+"!");
 
         //weź dane użytkownika
         DBHelper dbHelper = new DBHelper(this);
