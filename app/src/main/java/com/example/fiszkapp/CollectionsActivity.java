@@ -32,7 +32,7 @@ public class CollectionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_collections);
         helper = new DBHelper(this);
         mDatabase=helper.getWritableDatabase();
-        Cursor cursor=helper.getAllData("Collections");
+        Cursor cursor=helper.getAllData("Collection");
         buttonAddCollection =(Button) findViewById(R.id.buttonAddCollection);
         String[] languageItemArray = helper.getAllItemNamesAsArray("Language");
         spinnerLanguageFront=(Spinner) findViewById(R.id.spinnerLanguageFront);

@@ -22,7 +22,7 @@ public class SelectCollectionActivity extends AppCompatActivity {
 
         //do adaptera trzeba listę Stringów
         DBHelper helpMe = new DBHelper(this);
-        Cursor cursor = helpMe.getAllData(DBHelper.table_names[1]);
+        Cursor cursor = helpMe.getAllData(DBHelper.table_names[2]);
         ArrayList<String> collectionNames = new ArrayList<>();
         ArrayList<Integer> idList = new ArrayList<>();
         while(cursor.moveToNext())
