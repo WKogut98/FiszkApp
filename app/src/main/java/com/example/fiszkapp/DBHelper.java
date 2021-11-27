@@ -71,6 +71,13 @@ public class DBHelper extends SQLiteOpenHelper
         Cursor res = db.rawQuery("select * from "+table_name,null);
         return res;
     }
+    public Cursor getElementFromAttribute(String table_name, String attribute, String value)
+    {
+        //pobieranie rekordu z wartości atrybutu
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+table_name+" where "+attribute+"="+value,null);
+        return res;
+    }
     //public boolean updateData(String id, String username, int exp, int level)
     public boolean updateData(String id, String table_name, ContentValues contentValues)
     {
@@ -89,5 +96,18 @@ public class DBHelper extends SQLiteOpenHelper
         //usunięcie rekordu
         SQLiteDatabase db=this.getWritableDatabase();
         return db.delete(table_name,"ID = ?", new String[]{ id });
+    }
+    public String[] getAllItemNamesAsArray(String table_name)
+    {
+        Cursor cursor = getAllData(table_name);
+        String[] itemArray = new String[cursor.getCount()+2];
+        itemArray[0]="--Wybierz opcję--";
+        itemArray[1]="Dodaj";
+        for(int i=2;i<itemArray.length;i++)
+        {
+            cursor.moveToNext();
+            itemArray[i]=cursor.getString(1);
+        }
+        return itemArray;
     }
 }

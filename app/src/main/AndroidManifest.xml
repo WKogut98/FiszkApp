@@ -13,6 +13,9 @@
             android:name=".SelectCollectionActivity"
             android:exported="false" />
         <activity
+            android:name=".LanguageActivity"
+            android:exported="false" />
+        <activity
             android:name=".BadgesActivity"
             android:exported="false" />
         <activity
