@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FiszkApp">
         <activity
+            android:name=".LanguageActivity"
+            android:exported="false" />
+        <activity
             android:name=".BadgesActivity"
             android:exported="false" />
         <activity
