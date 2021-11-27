@@ -106,7 +106,7 @@ public class CollectionsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(CollectionsActivity.this, "Nie teraz możesz dodać kolekcji", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CollectionsActivity.this, "Wybierz języki do awersu lub rewersu", Toast.LENGTH_LONG).show();
                 }
             }
         });
