@@ -52,7 +52,7 @@ public class CollectionsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 languageFront=parent.getItemAtPosition(position).toString();
-                if(languageFront==languageItemArray[1])
+                if(languageFront.equals(languageItemArray[1]))
                 {
                     Intent toLanguage = new Intent(CollectionsActivity.this, LanguageActivity.class);
                     startActivityForResult(toLanguage, 0);
@@ -68,7 +68,7 @@ public class CollectionsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 languageBack=parent.getItemAtPosition(position).toString();
-                if(languageBack==languageItemArray[1])
+                if(languageBack.equals(languageItemArray[1]))
                 {
                     Intent toLanguage = new Intent(CollectionsActivity.this, LanguageActivity.class);
                     startActivityForResult(toLanguage, 0);
@@ -83,8 +83,8 @@ public class CollectionsActivity extends AppCompatActivity {
         buttonAddCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (languageFront!=languageItemArray[0]&&languageBack!=languageItemArray[0]
-                        &&languageFront!=languageItemArray[1]&&languageBack!=languageItemArray[1]) {
+                if (!languageFront.equals(languageItemArray[0]) && !languageBack.equals(languageItemArray[0])
+                        && !languageFront.equals(languageItemArray[1]) && !languageBack.equals(languageItemArray[1])) {
                     ContentValues contentValues = new ContentValues();
                     //public final static String[] cols_collection={"ID", "NAME", "LANGUAGE_ID_FRONT","LANGUAGE_ID_BACK"};
                     String name = editTextCollectionName.getText().toString();
