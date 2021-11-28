@@ -34,6 +34,7 @@ public class CollectionsActivity extends AppCompatActivity {
         mDatabase=helper.getWritableDatabase();
         Cursor cursor=helper.getAllData("Collection");
         buttonAddCollection =(Button) findViewById(R.id.buttonAddCollection);
+        editTextCollectionName = (EditText)findViewById(R.id.editTextCollectionName);
         String[] languageItemArray = helper.getAllItemNamesAsArray("Language");
         spinnerLanguageFront=(Spinner) findViewById(R.id.spinnerLanguageFront);
         spinnerLanguageBack=(Spinner) findViewById(R.id.spinnerLanguageBack);
@@ -89,9 +90,9 @@ public class CollectionsActivity extends AppCompatActivity {
                     //public final static String[] cols_collection={"ID", "NAME", "LANGUAGE_ID_FRONT","LANGUAGE_ID_BACK"};
                     String name = editTextCollectionName.getText().toString();
                     contentValues.put(DBHelper.cols_collection[1], name);
-                    Cursor cf = helper.getElementFromAttribute("Language", "NAME", languageFront);
+                    Cursor cf = helper.getElementFromAttribute("Language", "NAME", languageFront, true);
                     cf.moveToNext();
-                    Cursor cb = helper.getElementFromAttribute("Language", "NAME", languageBack);
+                    Cursor cb = helper.getElementFromAttribute("Language", "NAME", languageBack, true);
                     cb.moveToNext();
                     int languageFrontID = cf.getInt(0);
                     int languageBackID = cb.getInt(0);
@@ -101,7 +102,7 @@ public class CollectionsActivity extends AppCompatActivity {
                     if (isInserted) {
                         Toast.makeText(CollectionsActivity.this, "Dodano nową kolekcję", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(CollectionsActivity.this, "Nie udało się dodać", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CollectionsActivity.this, "Nie udało się dodać kolekcji", Toast.LENGTH_LONG).show();
                     }
                 }
                 else

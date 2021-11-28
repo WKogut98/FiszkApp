@@ -29,26 +29,25 @@ public class DBHelper extends SQLiteOpenHelper
                 +cols_user[1]+" TEXT,"+cols_user[2]+" INTEGER,"+cols_user[3]+" INTEGER)"); //utworzenie tabeli user
 
         db.execSQL("create table if not exists "+table_names[1]+" ("+cols_flashcard[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_flashcard[1]+" TEXT,"+cols_flashcard[2]+" TEXT"+cols_flashcard[3]+", INTEGER"+cols_flashcard[4]+", INTEGER)"); //utworzenie tabeli flashcard
+                +cols_flashcard[1]+" TEXT,"+cols_flashcard[2]+" TEXT,"+cols_flashcard[3]+" INTEGER,"+cols_flashcard[4]+" INTEGER)"); //utworzenie tabeli flashcard
 
         db.execSQL("create table if not exists "+table_names[2]+" ("+cols_collection[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_collection[1]+" TEXT,"+cols_collection[2]+" INTEGER"+cols_collection[3]+", INTEGER)"); //utworzenie tabeli collection
+                +cols_collection[1]+" TEXT,"+cols_collection[2]+" INTEGER,"+cols_collection[3]+" INTEGER)"); //utworzenie tabeli collection
 
         db.execSQL("create table if not exists "+table_names[3]+" ("+cols_lesson[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_lesson[1]+" DATETIME,"+cols_lesson[2]+" DATETIME"+cols_lesson[3]+", INTEGER"+cols_lesson[4]+", INTEGER"+cols_lesson[5]+", NUMBER)"); //utworzenie tabeli lesson
+                +cols_lesson[1]+" DATETIME,"+cols_lesson[2]+" DATETIME,"+cols_lesson[3]+" INTEGER,"+cols_lesson[4]+" INTEGER,"+cols_lesson[5]+" NUMBER)"); //utworzenie tabeli lesson
 
         db.execSQL("create table if not exists "+table_names[4]+" ("+cols_language[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +cols_language[1]+" TEXT)"); //utworzenie tabeli language
 
         db.execSQL("create table if not exists "+table_names[5]+" ("+cols_badge[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_badge[1]+" TEXT,"+cols_badge[2]+" TEXT"+cols_badge[3]+", BOOLEAN)"); //utworzenie tabeli badge
+                +cols_badge[1]+" TEXT,"+cols_badge[2]+" TEXT,"+cols_badge[3]+" BOOLEAN)"); //utworzenie tabeli badge
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        for(int i = 0; i<table_names.length; i++)
-        {
-            db.execSQL("drop table if exists "+table_names[i]); //drop all tables in a loop
+        for (String table_name : table_names) {
+            db.execSQL("drop table if exists " + table_name); //drop all tables in a loop
         }
         onCreate(db);
     }
@@ -68,15 +67,22 @@ public class DBHelper extends SQLiteOpenHelper
     {
         //pobieranie wszystkich danych
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+table_name,null);
-        return res;
+        return db.rawQuery("select * from "+table_name,null);
     }
     public Cursor getElementFromAttribute(String table_name, String attribute, String value)
     {
         //pobieranie rekordu z wartości atrybutu
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+table_name+" where "+attribute+"="+value,null);
-        return res;
+        return db.rawQuery("select * from "+table_name+" where "+attribute+"="+value,null);
+    }
+    public Cursor getElementFromAttribute(String table_name, String attribute, String value, Boolean isAttributeString)
+    {
+        if (isAttributeString) {
+            SQLiteDatabase db=this.getWritableDatabase();
+            return db.rawQuery("select * from "+table_name+" where "+attribute+"='"+value+"'",null);
+        } else {
+            return getElementFromAttribute(table_name,attribute,value);
+        }
     }
     //public boolean updateData(String id, String username, int exp, int level)
     public boolean updateData(String id, String table_name, ContentValues contentValues)
