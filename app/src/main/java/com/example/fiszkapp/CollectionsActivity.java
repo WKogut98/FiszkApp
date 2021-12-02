@@ -42,11 +42,10 @@ public class CollectionsActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> spinnerAdapter1 =
                 new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, languageItemArray);
                 //tworzymy adapter dla spinnera, przekazujemy te tablice co wczesniej
-        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //widok dla pojedynczego elementu
         ArrayAdapter<CharSequence> spinnerAdapter2 =
                 new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, languageItemArray);
                 //ArrayAdapter.createFromResource(this, languageItemArray, android.R.layout.simple_spinner_item);
-        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //widok dla pojedynczego elementu
         spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguageFront.setAdapter(spinnerAdapter1);
         spinnerLanguageBack.setAdapter(spinnerAdapter2);
