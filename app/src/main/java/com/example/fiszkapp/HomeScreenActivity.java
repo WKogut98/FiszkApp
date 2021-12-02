@@ -57,7 +57,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         buttonNewFlashcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toNewFlashcard = new Intent(HomeScreenActivity.this, SelectCollectionActivity.class);
+                Intent toNewFlashcard = new Intent(HomeScreenActivity.this, NewFlashcardActivity.class);
                 startActivityForResult(toNewFlashcard, 0);
             }
         });

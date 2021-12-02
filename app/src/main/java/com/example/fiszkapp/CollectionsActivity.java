@@ -21,7 +21,7 @@ public class CollectionsActivity extends AppCompatActivity {
     private SQLiteDatabase mDatabase;
     Button buttonAddCollection;
     EditText editTextCollectionName;
-    Spinner spinnerLanguageFront;
+    Spinner spinnerLanguageFront; //lista rozwijana
     Spinner spinnerLanguageBack;
     String languageFront;
     String languageBack;
@@ -36,12 +36,13 @@ public class CollectionsActivity extends AppCompatActivity {
         buttonAddCollection =(Button) findViewById(R.id.buttonAddCollection);
         editTextCollectionName = (EditText)findViewById(R.id.editTextCollectionName);
         String[] languageItemArray = helper.getAllItemNamesAsArray("Language");
+        //bierzemy wszystkie elementy z tabeli jezykow jako tablice
         spinnerLanguageFront=(Spinner) findViewById(R.id.spinnerLanguageFront);
         spinnerLanguageBack=(Spinner) findViewById(R.id.spinnerLanguageBack);
         ArrayAdapter<CharSequence> spinnerAdapter1 =
                 new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, languageItemArray);
-                //ArrayAdapter.createFromResource(this, languageItemArray, android.R.layout.simple_spinner_item);
-        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                //tworzymy adapter dla spinnera, przekazujemy te tablice co wczesniej
+        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //widok dla pojedynczego elementu
         ArrayAdapter<CharSequence> spinnerAdapter2 =
                 new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, languageItemArray);
                 //ArrayAdapter.createFromResource(this, languageItemArray, android.R.layout.simple_spinner_item);
@@ -49,11 +50,12 @@ public class CollectionsActivity extends AppCompatActivity {
         spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguageFront.setAdapter(spinnerAdapter1);
         spinnerLanguageBack.setAdapter(spinnerAdapter2);
+        //listener dla wybranego elementu
         spinnerLanguageFront.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                languageFront=parent.getItemAtPosition(position).toString();
-                if(languageFront.equals(languageItemArray[1]))
+                languageFront=parent.getItemAtPosition(position).toString(); //podsawiamy wybrany element pod wartosc zmiennej
+                if(languageFront.equals(languageItemArray[1])) //jak bierzemy opcję "dodaj"
                 {
                     Intent toLanguage = new Intent(CollectionsActivity.this, LanguageActivity.class);
                     startActivityForResult(toLanguage, 0);
@@ -91,6 +93,7 @@ public class CollectionsActivity extends AppCompatActivity {
                     String name = editTextCollectionName.getText().toString();
                     contentValues.put(DBHelper.cols_collection[1], name);
                     Cursor cf = helper.getElementFromAttribute("Language", "NAME", languageFront, true);
+                    //bierzemy rekord z pasującym atrybutem
                     cf.moveToNext();
                     Cursor cb = helper.getElementFromAttribute("Language", "NAME", languageBack, true);
                     cb.moveToNext();
