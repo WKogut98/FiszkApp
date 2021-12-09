@@ -26,6 +26,7 @@ public class CollectionsActivity extends AppCompatActivity {
     String languageFront;
     String languageBack;
     DBHelper helper;
+    private CollectionAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,10 @@ public class CollectionsActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> spinnerAdapter1 =
                 new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, languageItemArray);
                 //tworzymy adapter dla spinnera, przekazujemy te tablice co wczesniej
-        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //widok dla pojedynczego elementu
         ArrayAdapter<CharSequence> spinnerAdapter2 =
                 new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, languageItemArray);
                 //ArrayAdapter.createFromResource(this, languageItemArray, android.R.layout.simple_spinner_item);
-        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //widok dla pojedynczego elementu
         spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguageFront.setAdapter(spinnerAdapter1);
         spinnerLanguageBack.setAdapter(spinnerAdapter2);
@@ -116,5 +116,7 @@ public class CollectionsActivity extends AppCompatActivity {
         });
         RecyclerView recyclerViewCollections = (RecyclerView) findViewById(R.id.recyclerViewCollections);
         recyclerViewCollections.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new CollectionAdapter(this, cursor);
+        recyclerViewCollections.setAdapter(adapter);
     }
 }
