@@ -1,6 +1,7 @@
 package com.example.fiszkapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -62,11 +63,13 @@ public class LessonActivity extends AppCompatActivity {
                     int number = helpMe.getNumberOfFlashcardsInCollection(selectedCollection);
                     if(number < MIN_FLASHCARD_COUNT)
                     {
+                        int remaining = MIN_FLASHCARD_COUNT - number;
                         Toast.makeText(LessonActivity.this, "Za mało fiszek w kolekcji; " +
-                                "musi być przynajmniej 10", Toast.LENGTH_LONG).show();
+                                "dodaj jeszcze "+remaining, Toast.LENGTH_LONG).show();
                     }
                     else
                     {
+
                         Toast.makeText(LessonActivity.this, "Powinna się rozpocząć lekcja",
                                 Toast.LENGTH_SHORT).show();
                     }

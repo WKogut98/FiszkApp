@@ -87,8 +87,11 @@ public class CollectionsActivity extends AppCompatActivity {
         buttonAddCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!languageFront.equals(languageItemArray[0]) && !languageBack.equals(languageItemArray[0])
-                        && !languageFront.equals(languageItemArray[1]) && !languageBack.equals(languageItemArray[1])) {
+                if (!editTextCollectionName.getText().toString().isEmpty()
+                        && !languageFront.equals(languageItemArray[0])
+                        && !languageBack.equals(languageItemArray[0])
+                        && !languageFront.equals(languageItemArray[1])
+                        && !languageBack.equals(languageItemArray[1])) {
                     ContentValues contentValues = new ContentValues();
                     //public final static String[] cols_collection={"ID", "NAME", "LANGUAGE_ID_FRONT","LANGUAGE_ID_BACK"};
                     String name = editTextCollectionName.getText().toString();
@@ -106,6 +109,7 @@ public class CollectionsActivity extends AppCompatActivity {
                     if (isInserted) {
                         adapter.swapCursor(cursor);
                         Toast.makeText(CollectionsActivity.this, "Dodano nową kolekcję", Toast.LENGTH_LONG).show();
+                        editTextCollectionName.setText("");
                     } else {
                         Toast.makeText(CollectionsActivity.this, "Nie udało się dodać kolekcji", Toast.LENGTH_LONG).show();
                     }

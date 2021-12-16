@@ -51,7 +51,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position)
     {
-        if(!cursor.moveToPosition(position))
+        if(cursor.isClosed() || !cursor.moveToPosition(position))
         {
             return;
         }
