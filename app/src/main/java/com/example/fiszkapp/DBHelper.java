@@ -56,10 +56,6 @@ public class DBHelper extends SQLiteOpenHelper
     {
         //wstawianie danych
         SQLiteDatabase db=this.getWritableDatabase();
-        /*ContentValues contentValues=new ContentValues();
-        contentValues.put(COL_2,username);
-        contentValues.put(COL_3,experience);
-        contentValues.put(COL_4,level);*/
         long insert=db.insert(table_name,null,contentValues);
         return insert != -1;
     }
@@ -89,11 +85,6 @@ public class DBHelper extends SQLiteOpenHelper
     {
         //uaktualnienie danych rekordu
         SQLiteDatabase db=this.getWritableDatabase();
-        /*ContentValues contentValues=new ContentValues();
-        contentValues.put(COL_1,id);
-        contentValues.put(COL_2,username);
-        contentValues.put(COL_3,exp);
-        contentValues.put(COL_4,level);*/
         db.update(table_name,contentValues,"ID = ?", new String[]{ id });
         return true;
     }
@@ -115,5 +106,22 @@ public class DBHelper extends SQLiteOpenHelper
             itemArray[i]=cursor.getString(1);
         }
         return itemArray;
+    }
+
+    public int getNumberOfFlashcardsInCollection(String collectionName)
+    {
+        //trzeba znaleźć id kolekcji do której będziemy dodawać fiszkę
+        Cursor cur = getElementFromAttribute("Collection","NAME",collectionName,true);
+        cur.moveToNext();
+        int id = cur.getInt(0);
+        //weź liczbę fiszek
+        String query = "select count(1) from Flashcard f " +
+                "inner join Collection c on f.COLLECTION_ID = c.ID " +
+                "where c.id = "+id;
+        SQLiteDatabase db=this.getWritableDatabase();
+        cur = db.rawQuery(query,null);
+        cur.moveToNext();
+        int a = cur.getInt(0);
+        return a;
     }
 }

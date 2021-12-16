@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
                 boolean isInserted = dbHelper.insertData(DBHelper.table_names[0], contentValues);
                 if(isInserted)
                 {
-                    Toast.makeText(MainActivity.this,"Dodano Użytkownika",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Siema!",Toast.LENGTH_SHORT).show();
                     Intent toHomescreen = new Intent(MainActivity.this, HomeScreenActivity.class);
                     toHomescreen.putExtra("username", username);
                     startActivityForResult(toHomescreen, 0);
