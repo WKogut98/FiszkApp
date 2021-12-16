@@ -62,11 +62,9 @@
 
     <Button
         android:id="@+id/buttonNewFlashcard"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="137dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="137dp"
         android:text="Nowa Fiszka"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,11 +72,9 @@
 
     <Button
         android:id="@+id/buttonCollections"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="122dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="122dp"
         android:text="Twoje Kolekcje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +82,8 @@
 
     <Button
         android:id="@+id/buttonStartLesson"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginEnd="110dp"
         android:layout_marginBottom="40dp"
         android:text="Rozpocznij Lekcję"
         app:layout_constraintBottom_toTopOf="@+id/labelLastLesson"
@@ -123,11 +117,9 @@
 
     <Button
         android:id="@+id/buttonBadges"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="126dp"
         android:layout_marginTop="57dp"
-        android:layout_marginEnd="127dp"
         android:layout_marginBottom="68dp"
         android:text="Twoje Odznaki"
         app:layout_constraintBottom_toTopOf="@+id/buttonLessonHoistory"
@@ -137,10 +129,8 @@
 
     <Button
         android:id="@+id/buttonLessonHoistory"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginEnd="125dp"
         android:layout_marginBottom="56dp"
         android:text="Historia Lekcji"
         app:layout_constraintBottom_toTopOf="@+id/buttonStartLesson"

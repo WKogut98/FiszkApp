@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Users/Wojtek/AndroidStudioProjects/FiszkApp/app/src/main/res/layout/activity_language.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Wojtek/AndroidStudioProjects/FiszkApp/app/src/main/res/layout/activity_select_collection.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Wojtek/AndroidStudioProjects/FiszkApp/app/src/main/res/layout/badge_item.xml" value="0.7650602409638554" />
+        <entry key="..\:/Users/Wojtek/AndroidStudioProjects/FiszkApp/app/src/main/res/layout/collection_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Wojtek/AndroidStudioProjects/FiszkApp/app/src/main/res/layout/home_screen_activity.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
