@@ -83,6 +83,7 @@ public class CollectionsActivity extends AppCompatActivity {
 
             }
         });
+        adapter=new CollectionAdapter(this, cursor);
         buttonAddCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +104,7 @@ public class CollectionsActivity extends AppCompatActivity {
                     contentValues.put(DBHelper.cols_collection[3], languageBackID);
                     boolean isInserted = helper.insertData(DBHelper.table_names[2], contentValues);
                     if (isInserted) {
+                        adapter.swapCursor(cursor);
                         Toast.makeText(CollectionsActivity.this, "Dodano nową kolekcję", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(CollectionsActivity.this, "Nie udało się dodać kolekcji", Toast.LENGTH_LONG).show();
@@ -116,7 +118,6 @@ public class CollectionsActivity extends AppCompatActivity {
         });
         RecyclerView recyclerViewCollections = (RecyclerView) findViewById(R.id.recyclerViewCollections);
         recyclerViewCollections.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new CollectionAdapter(this, cursor);
         recyclerViewCollections.setAdapter(adapter);
     }
 }

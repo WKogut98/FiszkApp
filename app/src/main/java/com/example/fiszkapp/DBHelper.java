@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper
     public final static String[] cols_collection={"ID", "NAME", "LANGUAGE_ID_FRONT","LANGUAGE_ID_BACK"};
     public final static String[] cols_lesson={"ID", "STARTED", "ENDED", "TOTAL_QUESTIONS","ANSWERS_CORRECT", "GAINED_EXP"};
     public final static String[] cols_language={"ID", "NAME"};
-    public final static String[] cols_badge={"ID", "NAME", "DESCRIPTION", "IS_UNLOCKED"};
+    public final static String[] cols_badge={"ID", "NAME", "DESCRIPTION", "IMAGE", "IS_UNLOCKED"};
 
     public DBHelper(Context context)
     {
@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper
                 +cols_language[1]+" TEXT)"); //utworzenie tabeli language
 
         db.execSQL("create table if not exists "+table_names[5]+" ("+cols_badge[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_badge[1]+" TEXT,"+cols_badge[2]+" TEXT,"+cols_badge[3]+" BOOLEAN)"); //utworzenie tabeli badge
+                +cols_badge[1]+" TEXT,"+cols_badge[2]+" TEXT,"+cols_badge[3]+" TEXT,"+cols_badge[4]+" BOOLEAN)"); //utworzenie tabeli badge
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

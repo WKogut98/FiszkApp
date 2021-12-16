@@ -65,4 +65,17 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     {
         return cursor.getCount();
     }
+    public void swapCursor(Cursor cursor)
+    {
+        //wymiana kursora na nowy, służy do odświeżania bazy danych
+        if(this.cursor!=null)
+        {
+            this.cursor.close();
+        }
+        this.cursor=cursor;
+        if(cursor!=null)
+        {
+            notifyDataSetChanged();
+        }
+    }
 }
