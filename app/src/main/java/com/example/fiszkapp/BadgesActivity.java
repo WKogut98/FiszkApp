@@ -19,8 +19,8 @@ public class BadgesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_badges);
         helper=new DBHelper(this);
 
-        Cursor cursorUnlocked=helper.getElementFromAttribute("Badges", "IS_UNLOCKED", "true");
-        Cursor cursorLocked=helper.getElementFromAttribute("Badges", "IS_UNLOCKED", "false");
+        Cursor cursorUnlocked=helper.getElementFromAttribute("Badges", "IS_UNLOCKED", "1");
+        Cursor cursorLocked=helper.getElementFromAttribute("Badges", "IS_UNLOCKED", "0");
 
         adapterLocked = new BadgeAdapter(this, cursorLocked);
         adapterUnlocked = new BadgeAdapter(this, cursorUnlocked);

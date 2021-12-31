@@ -41,7 +41,8 @@ public class DBHelper extends SQLiteOpenHelper
                 +cols_language[1]+" TEXT)"); //utworzenie tabeli language
 
         db.execSQL("create table if not exists "+table_names[5]+" ("+cols_badge[0]+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +cols_badge[1]+" TEXT,"+cols_badge[2]+" TEXT,"+cols_badge[3]+" TEXT,"+cols_badge[4]+" BOOLEAN)"); //utworzenie tabeli badge
+                +cols_badge[1]+" TEXT,"+cols_badge[2]+" TEXT,"+cols_badge[3]+" TEXT,"+cols_badge[4]+" INTEGER)"); //utworzenie tabeli badge
+        populateBadges();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
@@ -123,5 +124,30 @@ public class DBHelper extends SQLiteOpenHelper
         cur.moveToNext();
         int a = cur.getInt(0);
         return a;
+    }
+    public void populateBadges()
+    {
+        String[][] badges={
+                {"Głodny wiedzy", "Ukończ pierwszą lekcję", "/res/drawable/badge01.png"},
+                {"O, to tu są levele?!", "Awansuj na poziom drugi", "/res/drawable/badge02.png"},
+                {"Mądra głowa", "Ukończ lekcję bez pomyłki", "/res/drawable/badge03.png"},
+                {"Chcę więcej", "Dodaj 10 fiszek", "/res/drawable/badge04.png"},
+                {"Dopiero się rozkręcam", "Dodaj 20 fiszek", "/res/drawable/badge05.png"},
+                {"Ciągle mi mało", "Dodaj 30 fiszek", "/res/drawable/badge06.png"},
+                {"Zahartowany w boju", "Awansuj na poziom dziesiąty", "/res/drawable/badge07.png"},
+                {"Sumienny", "Odbądź 5 lekcji z rzędu, dzień po dniu", "/res/drawable/badge08.png"},
+                {"Prymus", "Odbądź 10 lekcji z rzędu, dzień po dniu", "/res/drawable/badge10.png"},
+                {"Ćwiczenie czyni mistrza", "Odbądź 20 lekcji", "/res/drawable/badge11.png"},
+                {"Empiryk", "Zdobądź 5000 punktów doświadczenia", "/res/drawable/badge12.png"},
+                {"Lvl 100 BOSS", "Awansuj na poziom setny", "/res/drawable/badge13.png"},
+                {"Rage quit", "Wyjdź z lekcji przed jej końcem", "/res/drawable/badge14.png"},
+                {"Dywersyfikacja środków", "Miej przynajmniej 2 kolekcje z co najmniej 1 fiszką", "/res/drawable/badge15.png"},
+        };
+        SQLiteDatabase db=this.getWritableDatabase();
+        for(int i=0;i>15;i++)
+        {
+            db.rawQuery("INSERT INTO Badge ("+cols_badge[1]+","+cols_badge[2]+","+cols_badge[3]+","+cols_badge[4]+")" +
+                    "VALUES ('"+badges[i][0]+"', '"+badges[i][1]+"',"+badges[i][2]"', 0)");
+        }
     }
 }
