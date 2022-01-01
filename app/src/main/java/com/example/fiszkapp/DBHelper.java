@@ -147,7 +147,7 @@ public class DBHelper extends SQLiteOpenHelper
         for(int i=0;i>15;i++)
         {
             db.rawQuery("INSERT INTO Badge ("+cols_badge[1]+","+cols_badge[2]+","+cols_badge[3]+","+cols_badge[4]+")" +
-                    "VALUES ('"+badges[i][0]+"', '"+badges[i][1]+"',"+badges[i][2]"', 0)");
+                    "VALUES ('"+badges[i][0]+"', '"+badges[i][1]+"',"+badges[i][2]+"', 0)", null);
         }
     }
 }
