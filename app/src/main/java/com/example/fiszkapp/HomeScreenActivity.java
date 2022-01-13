@@ -82,5 +82,12 @@ public class HomeScreenActivity extends AppCompatActivity {
                 startActivityForResult(toLessonHistory, 0);
             }
         });
+        buttonBadges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toBadges = new Intent(HomeScreenActivity.this,BadgesActivity.class);
+                startActivityForResult(toBadges,0);
+            }
+        });
     }
 }
