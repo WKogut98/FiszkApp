@@ -128,20 +128,20 @@ public class DBHelper extends SQLiteOpenHelper
     public void populateBadges(SQLiteDatabase db)
     {
         String[][] badges={
-                {"Głodny wiedzy", "Ukończ pierwszą lekcję", "res/drawable/badge01.png"},
-                {"O, to tu są levele?!", "Awansuj na poziom drugi", "res/drawable/badge02.png"},
-                {"Mądra głowa", "Ukończ lekcję bez pomyłki", "res/drawable/badge03.png"},
-                {"Chcę więcej", "Dodaj 10 fiszek", "res/drawable/badge04.png"},
-                {"Dopiero się rozkręcam", "Dodaj 20 fiszek", "res/drawable/badge05.png"},
-                {"Ciągle mi mało", "Dodaj 30 fiszek", "res/drawable/badge06.png"},
-                {"Zahartowany w boju", "Awansuj na poziom dziesiąty", "res/drawable/badge07.png"},
-                {"Sumienny", "Odbądź 5 lekcji z rzędu, dzień po dniu", "res/drawable/badge08.png"},
-                {"Prymus", "Odbądź 10 lekcji z rzędu, dzień po dniu", "res/drawable/badge09.png"},
-                {"Ćwiczenie czyni mistrza", "Odbądź 20 lekcji", "res/drawable/badge10.png"},
-                {"Empiryk", "Zdobądź 5000 punktów doświadczenia", "res/drawable/badge11.png"},
-                {"Lvl 100 BOSS", "Awansuj na poziom setny", "res/drawable/badge12.png"},
-                {"Rage quit", "Wyjdź z lekcji przed jej końcem", "res/drawable/badge13.png"},
-                {"Dywersyfikacja środków", "Miej przynajmniej 2 kolekcje z co najmniej 1 fiszką", "/res/drawable/badge14.png"},
+                {"Głodny wiedzy", "Ukończ pierwszą lekcję", Integer.toString(R.drawable.badge01)},
+                {"O, to tu są levele?!", "Awansuj na poziom drugi", Integer.toString(R.drawable.badge02)},
+                {"Mądra głowa", "Ukończ lekcję bez pomyłki", Integer.toString(R.drawable.badge03)},
+                {"Chcę więcej", "Dodaj 10 fiszek", Integer.toString(R.drawable.badge04)},
+                {"Dopiero się rozkręcam", "Dodaj 20 fiszek", Integer.toString(R.drawable.badge05)},
+                {"Ciągle mi mało", "Dodaj 30 fiszek", Integer.toString(R.drawable.badge06)},
+                {"Zahartowany w boju", "Awansuj na poziom dziesiąty", Integer.toString(R.drawable.badge07)},
+                {"Sumienny", "Odbądź 5 lekcji z rzędu, dzień po dniu", Integer.toString(R.drawable.badge08)},
+                {"Prymus", "Odbądź 10 lekcji z rzędu, dzień po dniu", Integer.toString(R.drawable.badge09)},
+                {"Ćwiczenie czyni mistrza", "Odbądź 20 lekcji", Integer.toString(R.drawable.badge10)},
+                {"Empiryk", "Zdobądź 5000 punktów doświadczenia", Integer.toString(R.drawable.badge11)},
+                {"Lvl 100 BOSS", "Awansuj na poziom setny", Integer.toString(R.drawable.badge12)},
+                {"Rage quit", "Wyjdź z lekcji przed jej końcem", Integer.toString(R.drawable.badge13)},
+                {"Dywersyfikacja środków", "Miej przynajmniej 2 kolekcje z co najmniej 1 fiszką", Integer.toString(R.drawable.badge14)},
         };
         for(int i=0;i<14;i++)
         {

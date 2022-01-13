@@ -3,6 +3,7 @@ package com.example.fiszkapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.File;
 
 
 public class BadgeAdapter extends RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>
@@ -57,13 +60,13 @@ public class BadgeAdapter extends RecyclerView.Adapter<BadgeAdapter.BadgeViewHol
         {
             return;
         }
-        String imagePath=cursor.getString(3);
+        int image=Integer.parseInt(cursor.getString(3));
         String name=cursor.getString(1);
         String description=cursor.getString(2);
         int id = cursor.getInt(0);
         holder.badgeName.setText(name);
         holder.badgeDescription.setText(description);
-        holder.icon.setImageDrawable(Drawable.createFromPath(imagePath));
+        holder.icon.setImageResource(image);
         holder.itemView.setTag(id);
     }
     @Override
