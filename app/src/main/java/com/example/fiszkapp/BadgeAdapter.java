@@ -57,7 +57,7 @@ public class BadgeAdapter extends RecyclerView.Adapter<BadgeAdapter.BadgeViewHol
         {
             return;
         }
-        String imagePath=cursor.getString(4);
+        String imagePath=cursor.getString(3);
         String name=cursor.getString(1);
         String description=cursor.getString(2);
         int id = cursor.getInt(0);

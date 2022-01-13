@@ -24,6 +24,8 @@ public class BadgesActivity extends AppCompatActivity {
         adapterLocked = new BadgeAdapter(this, cursorLocked);
         adapterUnlocked = new BadgeAdapter(this, cursorUnlocked);
 
+
+
         RecyclerView recyclerViewUnlocked=(RecyclerView) findViewById(R.id.RecyclerViewUnlocked);
         RecyclerView recyclerViewLocked=(RecyclerView) findViewById(R.id.RecyclerViewLocked);
         recyclerViewUnlocked.setLayoutManager(new LinearLayoutManager(this));
