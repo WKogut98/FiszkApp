@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBHelper extends SQLiteOpenHelper
 {
     public final static String DB_NAME="FiszkApp.db";
@@ -125,6 +128,32 @@ public class DBHelper extends SQLiteOpenHelper
         int a = cur.getInt(0);
         return a;
     }
+
+    public List<FlashCard> getFlashcardsInCollection(String collectionName)
+    {
+        String query = "select * from Flashcard f " +
+                "inner join Collection c on f.COLLECTION_ID = c.ID " +
+                "where c.NAME = '"+collectionName+"' " +
+                "order by f.PRIORITY asc " +
+                "limit 5";
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor cur = db.rawQuery(query,null);
+        List<FlashCard> list = new ArrayList<>();
+        int id;
+        String front;
+        String back;
+        int priority;
+        while(cur.moveToNext())
+        {
+            id = cur.getInt(0);
+            front = cur.getString(1);
+            back = cur.getString(2);
+            priority = cur.getInt(3);
+            list.add(new FlashCard(id,front,back,priority));
+        }
+        return list;
+    }
+
     public void populateBadges(SQLiteDatabase db)
     {
         String[][] badges={
