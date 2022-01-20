@@ -18,7 +18,14 @@
             android:id="@+id/TextWord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Słowo" />
+            android:text="Słowo"
+            android:textSize="32dp" />
     </FrameLayout>
+
+    <Button
+        android:id="@+id/buttonFlip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Odwróć" />
 
 </LinearLayout>
