@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LessonStartActivity extends AppCompatActivity {
 
     Spinner spinner;
@@ -67,7 +70,8 @@ public class LessonStartActivity extends AppCompatActivity {
                     }
                     else
                     {
-
+                        String colName = selectedCollection;
+                        List<FlashCard> list = helpMe.getFlashcardsInCollection(colName);
                         Toast.makeText(LessonStartActivity.this, "Powinna się rozpocząć lekcja",
                                 Toast.LENGTH_SHORT).show();
                     }
