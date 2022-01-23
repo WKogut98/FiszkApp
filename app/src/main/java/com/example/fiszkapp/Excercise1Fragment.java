@@ -23,15 +23,18 @@ public class Excercise1Fragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
+    private static final String ARG_PARAM4 = "param4";
 
     // TODO: Rename and change types of parameters
     private String word;
     private String rightAnswer;
     private boolean isReversed;
+    private String collectionName;
     private String wrongAnswer;
     TextView textWord;
     Button buttonOption1;
     Button buttonOption2;
+    DBHelper helper;
 
     public Excercise1Fragment() {
         // Required empty public constructor
@@ -46,12 +49,13 @@ public class Excercise1Fragment extends Fragment {
      * @return A new instance of fragment Excercise1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Excercise1Fragment newInstance(String word, String rightAnswer, boolean isReversed) {
+    public static Excercise1Fragment newInstance(String word, String rightAnswer, boolean isReversed, String collectionName) {
         Excercise1Fragment fragment = new Excercise1Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, word);
         args.putString(ARG_PARAM2, rightAnswer);
         args.putBoolean(ARG_PARAM3, isReversed);
+        args.putString(ARG_PARAM4, collectionName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,6 +67,7 @@ public class Excercise1Fragment extends Fragment {
             word = getArguments().getString(ARG_PARAM1);
             rightAnswer = getArguments().getString(ARG_PARAM2);
             isReversed = getArguments().getBoolean(ARG_PARAM3);
+            collectionName=getArguments().getString(ARG_PARAM4);
         }
     }
 
@@ -75,6 +80,7 @@ public class Excercise1Fragment extends Fragment {
         buttonOption1=view.findViewById(R.id.buttonOption1);
         buttonOption2=view.findViewById(R.id.buttonOption2);
         textWord.setText(word);
+        wrongAnswer=helper.getWordsInRandomOrder(collectionName, isReversed).get(0);
         setOptionWords();
         buttonOption1.setOnClickListener(new View.OnClickListener() {
             @Override

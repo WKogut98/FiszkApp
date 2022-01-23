@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper
@@ -152,6 +153,24 @@ public class DBHelper extends SQLiteOpenHelper
             list.add(new FlashCard(id,front,back,priority));
         }
         return list;
+    }
+    public List<String> getWordsInRandomOrder(String collectionName, boolean isReversed)
+    {
+        List<FlashCard> list=getFlashcardsInCollection(collectionName);
+        List<String> words=new ArrayList<>();
+        for(FlashCard f:list)
+        {
+            if(!isReversed)
+            {
+                words.add(f.back);
+            }
+            else
+            {
+                words.add(f.front);
+            }
+        }
+        Collections.shuffle(words);
+        return words;
     }
 
     public void populateBadges(SQLiteDatabase db)
