@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Excercise2Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textGivenWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Słowo"
+            android:textSize="30dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:rotation="90"
+            android:rotationY="0" />
+
+        <TextView
+            android:id="@+id/labelAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="To w tłumaczeniu:" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <EditText
+            android:id="@+id/editTextAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <Button
+            android:id="@+id/buttonConfirmAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zatwierdź" />
+    </LinearLayout>
+
+</FrameLayout>
