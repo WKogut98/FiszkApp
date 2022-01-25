@@ -76,7 +76,7 @@ public class Excercise2Fragment extends Fragment {
             public void onClick(View v) {
                 if(editTextAnswer.equals(""))
                 {
-                    Toast.makeText(Excercise2Fragment.this, "Najpierw wprowadź odpowiedź", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Najpierw wprowadź odpowiedź", Toast.LENGTH_SHORT).show();
                 }
                 else if(editTextAnswer.equals(rightAnswer))
                 {

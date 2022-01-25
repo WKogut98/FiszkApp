@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 public class LessonActivity extends AppCompatActivity {
 
-    String front;
-    String back;
+    String front="Piotr";
+    String back="Kopniak";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

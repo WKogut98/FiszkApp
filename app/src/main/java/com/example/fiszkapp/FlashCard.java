@@ -1,17 +1,20 @@
 package com.example.fiszkapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class FlashCard {
+public class FlashCard implements Serializable
+{
     int id;
     String front;
     String back;
     int priority;
 
-    public FlashCard(int id, String front, String back, int priority) {
+    public FlashCard(int id, String front, String back, int priority)
+    {
         this.id = id;
         this.front = front;
         this.back = back;

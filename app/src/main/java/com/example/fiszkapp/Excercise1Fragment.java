@@ -102,7 +102,7 @@ public class Excercise1Fragment extends Fragment {
         String word1="";
         String word2="";
         int coinFlip=(int)Math.round(Math.random());
-        if(coinFlip)
+        if(coinFlip!=0)
         {
             word1 = rightAnswer;
             word2 = wrongAnswer;

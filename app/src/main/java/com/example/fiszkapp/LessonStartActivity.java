@@ -19,7 +19,7 @@ public class LessonStartActivity extends AppCompatActivity {
     Spinner spinner;
     Button button;
     String selectedCollection;
-    final int MIN_FLASHCARD_COUNT = 10;
+    final int MIN_FLASHCARD_COUNT = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +71,10 @@ public class LessonStartActivity extends AppCompatActivity {
                     else
                     {
                         String colName = selectedCollection;
-                        List<FlashCard> list = helpMe.getFlashcardsInCollection(colName);
-                        Toast.makeText(LessonStartActivity.this, "Powinna się rozpocząć lekcja",
-                                Toast.LENGTH_SHORT).show();
+                        ArrayList<FlashCard> list = (ArrayList<FlashCard>) helpMe.getFlashcardsInCollection(colName);
+                        Intent toLesson = new Intent(LessonStartActivity.this, LessonActivity.class);
+                        toLesson.putExtra("list", list);
+                        startActivityForResult(toLesson, 0);
                     }
                 }
                 else
