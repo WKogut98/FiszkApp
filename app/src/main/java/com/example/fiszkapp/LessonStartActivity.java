@@ -71,9 +71,8 @@ public class LessonStartActivity extends AppCompatActivity {
                     else
                     {
                         String colName = selectedCollection;
-                        ArrayList<FlashCard> list = (ArrayList<FlashCard>) helpMe.getFlashcardsInCollection(colName);
                         Intent toLesson = new Intent(LessonStartActivity.this, LessonActivity.class);
-                        toLesson.putExtra("list", list);
+                        toLesson.putExtra("collectionName", colName);
                         startActivityForResult(toLesson, 0);
                     }
                 }
