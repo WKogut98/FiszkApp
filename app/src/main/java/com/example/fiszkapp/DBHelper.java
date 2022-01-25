@@ -173,6 +173,18 @@ public class DBHelper extends SQLiteOpenHelper
         return words;
     }
 
+    public void updateFlashcardsToDB(List<FlashCard> list)
+    {
+        for (FlashCard card : list)
+        {
+            String query = "update Flashcard set " +
+                    "PRIORITY = " + card.getPriority() + " " +
+                    "WHERE ID = " + card.getId();
+            SQLiteDatabase db=this.getWritableDatabase();
+            db.execSQL(query);
+        }
+    }
+
     public void populateBadges(SQLiteDatabase db)
     {
         String[][] badges={
