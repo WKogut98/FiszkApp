@@ -210,4 +210,12 @@ public class DBHelper extends SQLiteOpenHelper
             db.execSQL(query);
         }
     }
+
+    public boolean isBadgeUnlocked(String badgeName)
+    {
+        Cursor badge=getElementFromAttribute("Badges", "name", badgeName);
+        badge.moveToNext();
+        int isUnlocked=badge.getInt(4);
+        return isUnlocked != 0;
+    }
 }
