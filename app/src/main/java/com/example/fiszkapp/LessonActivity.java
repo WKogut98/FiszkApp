@@ -76,11 +76,11 @@ public class LessonActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!helper.isBadgeUnlocked("Rage quit"))
                 {
-                    Cursor badge =helper.getElementFromAttribute("badges", "name","Rage quit");
+                    Cursor badge =helper.getElementFromAttribute("Badge", "name","Rage quit",true);
                     badge.moveToNext();
                     ContentValues values=new ContentValues();
                     values.put(DBHelper.cols_badge[4],1);
-                    helper.updateData(""+badge.getInt(0), "badge", values);
+                    helper.updateData(""+badge.getInt(0), "Badge", values);
                 }
                 finish();
             }

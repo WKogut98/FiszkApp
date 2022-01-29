@@ -213,7 +213,7 @@ public class DBHelper extends SQLiteOpenHelper
 
     public boolean isBadgeUnlocked(String badgeName)
     {
-        Cursor badge=getElementFromAttribute("Badges", "name", badgeName);
+        Cursor badge=getElementFromAttribute("Badge", "name", badgeName,true);
         badge.moveToNext();
         int isUnlocked=badge.getInt(4);
         return isUnlocked != 0;
