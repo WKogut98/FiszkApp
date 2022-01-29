@@ -1,11 +1,5 @@
 package com.example.fiszkapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentContainer;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -14,8 +8,12 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import java.util.List;
 
 public class LessonActivity extends AppCompatActivity {
@@ -29,6 +27,7 @@ public class LessonActivity extends AppCompatActivity {
     Button buttonEndLesson;
     TextView textTimer;
     long timeLeft;
+    boolean isLearning;
     private CountDownTimer timer; //zegar odmierzajacy czas do końca lekcji
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +36,8 @@ public class LessonActivity extends AppCompatActivity {
         String colName= bundle.getString("collectionName");
         helper=new DBHelper(this);
         List<FlashCard> flashCards = helper.getFlashcardsInCollection(colName);
+        int numberOfFlashcards = flashCards.size();
+
         front = flashCards.get(currentIndex).getFront();
         back = flashCards.get(currentIndex).getBack();
         setContentView(R.layout.activity_lesson);
@@ -44,8 +45,8 @@ public class LessonActivity extends AppCompatActivity {
         buttonEndLesson = findViewById(R.id.buttonEndLesson);
         buttonEndLesson.setBackgroundColor(Color.RED);
         textTimer=findViewById(R.id.textTimer);
-
-        timeLeft=60000;
+        timeLeft=60 * 1000;
+        isLearning = true;
 
         startTimer();
 
@@ -59,16 +60,43 @@ public class LessonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentIndex++;
-                front = flashCards.get(currentIndex).getFront();
-                back = flashCards.get(currentIndex).getBack();
-                Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainerView);
-                if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                if (isLearning && currentIndex < numberOfFlashcards) {
+                    front = flashCards.get(currentIndex).getFront();
+                    back = flashCards.get(currentIndex).getBack();
+                    Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainerView);
+                    if (fragment != null) {
+                        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                    }
+                    fragmentManager.beginTransaction().
+                            setReorderingAllowed(true).
+                            add(R.id.fragmentContainerView, CardFragment.newInstance(front, back), null)
+                            .commit();
+                } else {
+                    if(isLearning)
+                    {
+                        currentIndex = 0;
+                        isLearning=8==3;//lmao
+                        resetTimer();
+                    }
+                    //przejdź do ćwiczenia
+                    if(currentIndex < numberOfFlashcards)
+                    {
+                        front = flashCards.get(currentIndex).getFront();
+                        back = flashCards.get(currentIndex).getBack();
+                        Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainerView);
+                        if (fragment != null) {
+                            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                        }
+                        fragmentManager.beginTransaction().
+                                setReorderingAllowed(true).
+                                add(R.id.fragmentContainerView, Excercise2Fragment.newInstance(front,back), null)
+                                .commit();
+                    }
+                    else {
+                        Toast.makeText(LessonActivity.this, "dowidzenia kons lekcja", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
-                fragmentManager.beginTransaction().
-                        setReorderingAllowed(true).
-                        add(R.id.fragmentContainerView, CardFragment.newInstance(front, back), null)
-                        .commit();
             }
         });
         buttonEndLesson.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +125,10 @@ public class LessonActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                //przejdź do ćwiczenia
 
+                //i zresetuj timer
+                resetTimer();
             }
         };
         timer.start();
@@ -105,6 +136,11 @@ public class LessonActivity extends AppCompatActivity {
     public void stopTimer()
     {
         timer.cancel();
+    }
+    public void resetTimer()
+    {
+        timer.cancel();
+        timer.start();
     }
     public void updateTimerText()
     {

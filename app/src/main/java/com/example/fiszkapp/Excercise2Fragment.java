@@ -74,11 +74,11 @@ public class Excercise2Fragment extends Fragment {
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextAnswer.equals(""))
+                if(editTextAnswer.getText().toString().equals(""))
                 {
                     Toast.makeText(getActivity(), "Najpierw wprowadź odpowiedź", Toast.LENGTH_SHORT).show();
                 }
-                else if(editTextAnswer.equals(rightAnswer))
+                else if(editTextAnswer.getText().toString().toLowerCase().equals(rightAnswer.toLowerCase()))
                 {
                     editTextAnswer.setTextColor(Color.GREEN);
                 }
