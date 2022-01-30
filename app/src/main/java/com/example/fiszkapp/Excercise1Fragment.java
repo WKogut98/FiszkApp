@@ -81,7 +81,7 @@ public class Excercise1Fragment extends Fragment {
         buttonOption1=view.findViewById(R.id.buttonOption1);
         buttonOption2=view.findViewById(R.id.buttonOption2);
         textWord.setText(word);
-        wrongAnswer=helper.getWordsInRandomOrder(collectionName, isReversed).get(0);
+        wrongAnswer=helper.getWordsInRandomOrder(collectionName, isReversed, rightAnswer).get(0);
         setOptionWords();
         buttonOption1.setOnClickListener(new View.OnClickListener() {
             @Override

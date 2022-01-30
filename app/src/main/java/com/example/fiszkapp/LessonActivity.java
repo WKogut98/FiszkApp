@@ -118,6 +118,7 @@ public class LessonActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
+                        // przyznaj odznakę za pierwszą lekcję
                         finish();
                     }
                 }

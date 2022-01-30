@@ -154,7 +154,7 @@ public class DBHelper extends SQLiteOpenHelper
         }
         return list;
     }
-    public List<String> getWordsInRandomOrder(String collectionName, boolean isReversed)
+    public List<String> getWordsInRandomOrder(String collectionName, boolean isReversed, String rightAnswer)
     {
         List<FlashCard> list=getFlashcardsInCollection(collectionName);
         List<String> words=new ArrayList<>();
@@ -169,6 +169,7 @@ public class DBHelper extends SQLiteOpenHelper
                 words.add(f.front);
             }
         }
+        words.remove(rightAnswer);
         Collections.shuffle(words);
         return words;
     }
