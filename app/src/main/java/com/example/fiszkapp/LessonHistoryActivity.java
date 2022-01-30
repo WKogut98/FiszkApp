@@ -1,6 +1,7 @@
 package com.example.fiszkapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
@@ -18,7 +19,8 @@ public class LessonHistoryActivity extends AppCompatActivity {
         helper=new DBHelper(this);
         Cursor cursor=helper.getAllData("Lesson");
         adapter = new LessonAdapter(this, cursor);
-        RecyclerView recyclerView=findViewById(R.id.recyclerViewLessons);
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerViewLessons);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 }

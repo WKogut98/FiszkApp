@@ -1,10 +1,8 @@
 package com.example.fiszkapp;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class FlashCard implements Serializable
 {
@@ -64,16 +62,14 @@ public class FlashCard implements Serializable
         this.back = back;
     }
 
-    public FlashCard rightAnswer()
+    public void rightAnswer()
     {
         this.priority = (this.priority+1) * 2;
-        return this;
     }
 
-    public FlashCard wrongAnswer()
+    public void wrongAnswer()
     {
         this.priority /=2;
-        return this;
     }
 
     public static List<FlashCard> shuffleList(List<FlashCard> list)

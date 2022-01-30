@@ -38,14 +38,14 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
         }
         holder.textStarted.setText(cursor.getString(1));
         holder.textEnded.setText(cursor.getString(2));
-        holder.textTotalQuest.setText(cursor.getInt(3));
-        holder.textCorrect.setText(cursor.getInt(4));
-        holder.textGainedExp.setText(cursor.getInt(5));
+        holder.textTotalQuest.setText(String.valueOf(cursor.getInt(3)));
+        holder.textCorrect.setText(String.valueOf(cursor.getInt(4)));
+        holder.textGainedExp.setText(String.valueOf(cursor.getInt(5)));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cursor.getCount();
     }
 
     public class LessonViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener
