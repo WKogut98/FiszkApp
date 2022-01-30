@@ -212,11 +212,22 @@ public class DBHelper extends SQLiteOpenHelper
         }
     }
 
-    public boolean isBadgeUnlocked(String badgeName)
+    public boolean isBadgeUnlocked(String badgeName) //sprawdzenie czy odznaka jest odblokowana
     {
         Cursor badge=getElementFromAttribute("Badge", "name", badgeName,true);
         badge.moveToNext();
         int isUnlocked=badge.getInt(4);
         return isUnlocked != 0;
+    }
+    public void unlockBadge(String badgeName) //odblokowanie odznaki
+    {
+        if(!isBadgeUnlocked(badgeName))
+        {
+            Cursor badge =getElementFromAttribute("Badge", "name",badgeName,true);
+            badge.moveToNext();
+            ContentValues values=new ContentValues();
+            values.put(DBHelper.cols_badge[4],1);
+            updateData(""+badge.getInt(0), "Badge", values);
+        }
     }
 }

@@ -81,10 +81,12 @@ public class Excercise2Fragment extends Fragment {
                 else if(editTextAnswer.getText().toString().toLowerCase().equals(rightAnswer.toLowerCase()))
                 {
                     editTextAnswer.setTextColor(Color.GREEN);
+                    ((LessonActivity)getActivity()).answerList.add(true);
                 }
                 else
                 {
                     editTextAnswer.setTextColor(Color.RED);
+                    ((LessonActivity)getActivity()).answerList.add(false);
                 }
             }
         });

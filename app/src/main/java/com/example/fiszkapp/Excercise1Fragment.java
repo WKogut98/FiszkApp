@@ -120,10 +120,12 @@ public class Excercise1Fragment extends Fragment {
         if(chosenOption.getText().equals(rightAnswer))
         {
             chosenOption.setBackgroundColor(Color.GREEN);
+            ((LessonActivity)getActivity()).answerList.add(true);
         }
         else
         {
             chosenOption.setBackgroundColor(Color.RED);
+            ((LessonActivity)getActivity()).answerList.add(false);
         }
     }
     private boolean flipACoin()
