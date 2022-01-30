@@ -25,7 +25,6 @@ public class Experience {
     {
         int expToLevel=calculateNeededExp(level);
         int currentexp=calculateExpFromCurrentLevel(exp, level);
-        //int a = totalExpToGetLevel(level+1);
         return expToLevel - currentexp;
     }
 

@@ -50,7 +50,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         int level = cursor.getInt(3);
         int exp = cursor.getInt(2);
         textLevel.setText(String.valueOf(level));
-        int percentage = Experience.calculateExpFromCurrentLevel(exp,level)/Experience.calculateNeededExp(level)*100;
+        int percentage = (int)((float)Experience.calculateExpFromCurrentLevel(exp,level)/Experience.calculateNeededExp(level)*100);
         progressBarExp.setProgress(percentage);
         textExp.setText("pozostało: "+ Experience.expToNextLevel(exp, level));
 
