@@ -89,9 +89,8 @@ public class LessonActivity extends AppCompatActivity {
                         }
                         String word="";
                         String answer="";
-                        int rev=(int)Math.round(Math.random());
                         boolean isReversed = false;
-                        if(rev==0)
+                        if(flipACoin())
                         {
                             word=front;
                             answer=back;
@@ -101,8 +100,7 @@ public class LessonActivity extends AppCompatActivity {
                             answer = front;
                             isReversed=true;
                         }
-                        int coinFlip=(int)Math.round(Math.random());
-                        if(coinFlip==0)
+                        if(flipACoin())
                         {
                             fragmentManager.beginTransaction().
                                     setReorderingAllowed(true).
@@ -179,5 +177,9 @@ public class LessonActivity extends AppCompatActivity {
         }
         String timerText="Czas: " + minutes + ":" + secStr;
         textTimer.setText(timerText);
+    }
+    private boolean flipACoin()
+    {
+        return (int)Math.round(Math.random()) == 0;
     }
 }

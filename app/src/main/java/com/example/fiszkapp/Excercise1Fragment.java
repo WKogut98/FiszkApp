@@ -102,8 +102,7 @@ public class Excercise1Fragment extends Fragment {
     {
         String word1="";
         String word2="";
-        int coinFlip=(int)Math.round(Math.random());
-        if(coinFlip!=0)
+        if(flipACoin())
         {
             word1 = rightAnswer;
             word2 = wrongAnswer;
@@ -126,5 +125,9 @@ public class Excercise1Fragment extends Fragment {
         {
             chosenOption.setBackgroundColor(Color.RED);
         }
+    }
+    private boolean flipACoin()
+    {
+        return (int)Math.round(Math.random()) == 0;
     }
 }
