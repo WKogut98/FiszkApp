@@ -75,6 +75,7 @@ public class Excercise1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        helper = new DBHelper(getActivity());
         View view =inflater.inflate(R.layout.fragment_excercise1, container, false);
         textWord=view.findViewById(R.id.textWordQuestion);
         buttonOption1=view.findViewById(R.id.buttonOption1);

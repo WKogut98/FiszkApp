@@ -87,13 +87,39 @@ public class LessonActivity extends AppCompatActivity {
                         if (fragment != null) {
                             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                         }
-                        fragmentManager.beginTransaction().
-                                setReorderingAllowed(true).
-                                add(R.id.fragmentContainerView, Excercise2Fragment.newInstance(front,back), null)
-                                .commit();
+                        String word="";
+                        String answer="";
+                        int rev=(int)Math.round(Math.random());
+                        boolean isReversed = false;
+                        if(rev==0)
+                        {
+                            word=front;
+                            answer=back;
+                        }
+                        else {
+                            word = back;
+                            answer = front;
+                            isReversed=true;
+                        }
+                        int coinFlip=(int)Math.round(Math.random());
+                        if(coinFlip==0)
+                        {
+                            fragmentManager.beginTransaction().
+                                    setReorderingAllowed(true).
+                                    add(R.id.fragmentContainerView, Excercise1Fragment.newInstance(word, answer, isReversed,
+                                            colName), null)
+                                    .commit();
+                        }
+                        else
+                        {
+                            fragmentManager.beginTransaction().
+                                    setReorderingAllowed(true).
+                                    add(R.id.fragmentContainerView, Excercise2Fragment.newInstance(word, answer), null)
+                                    .commit();
+                        }
                     }
                     else {
-                        Toast.makeText(LessonActivity.this, "dowidzenia kons lekcja", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
