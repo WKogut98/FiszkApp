@@ -57,7 +57,13 @@ public class LessonActivity extends AppCompatActivity {
         buttonEndLesson = findViewById(R.id.buttonEndLesson);
         buttonEndLesson.setBackgroundColor(Color.RED);
         textTimer=findViewById(R.id.textTimer);
-        timeLeft=60 * 1000;
+        //czas jest zmienny
+        //i zależy od poziomu użytkownika
+        Cursor c = helper.getAllData("User");
+        c.moveToNext();
+        int level = c.getInt(3);
+        timeLeft=Math.max((95 - (5*level)) * 1000, 20 * 1000);
+
         isLearning = true;
 
         values=new ContentValues();
@@ -277,6 +283,7 @@ public class LessonActivity extends AppCompatActivity {
         }
         helper.updateData(String.valueOf(userId), "User", cv);
         Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
+        timer.cancel();
         finish();
     }
 }
