@@ -113,6 +113,12 @@ public class DBHelper extends SQLiteOpenHelper
         return itemArray;
     }
 
+    public Cursor getLastLesson()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.rawQuery("select * from Lesson order by ENDED desc limit 1",null);
+    }
+
     public int getNumberOfFlashcardsInCollection(String collectionName)
     {
         //trzeba znaleźć id kolekcji do której będziemy dodawać fiszkę
@@ -196,13 +202,13 @@ public class DBHelper extends SQLiteOpenHelper
                 {"Dopiero się rozkręcam", "Dodaj 20 fiszek", Integer.toString(R.drawable.badge05)},
                 {"Ciągle mi mało", "Dodaj 30 fiszek", Integer.toString(R.drawable.badge06)},
                 {"Zahartowany w boju", "Awansuj na poziom dziesiąty", Integer.toString(R.drawable.badge07)},
-                {"Sumienny", "Odbądź 5 lekcji z rzędu, dzień po dniu", Integer.toString(R.drawable.badge08)},
-                {"Prymus", "Odbądź 10 lekcji z rzędu, dzień po dniu", Integer.toString(R.drawable.badge09)},
+                {"Sumienny", "Odbądź 5 lekcji", Integer.toString(R.drawable.badge08)},
+                {"Prymus", "Odbądź 10 lekcji", Integer.toString(R.drawable.badge09)},
                 {"Ćwiczenie czyni mistrza", "Odbądź 20 lekcji", Integer.toString(R.drawable.badge10)},
                 {"Empiryk", "Zdobądź 5000 punktów doświadczenia", Integer.toString(R.drawable.badge11)},
                 {"Lvl 100 BOSS", "Awansuj na poziom setny", Integer.toString(R.drawable.badge12)},
                 {"Rage quit", "Wyjdź z lekcji przed jej końcem", Integer.toString(R.drawable.badge13)},
-                {"Dywersyfikacja środków", "Miej przynajmniej 2 kolekcje z co najmniej 1 fiszką", Integer.toString(R.drawable.badge14)},
+                {"Dywersyfikacja środków", "Miej przynajmniej 2 kolekcje", Integer.toString(R.drawable.badge14)},
         };
         for(int i=0;i<14;i++)
         {

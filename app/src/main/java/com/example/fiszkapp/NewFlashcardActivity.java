@@ -81,6 +81,20 @@ public class NewFlashcardActivity extends AppCompatActivity {
                     //dodajemy do DB
                     boolean isInserted = helpMe.insertData(DBHelper.table_names[1], cv); //Flashcard
                     if (isInserted) {
+                        Cursor allFlashcards=helpMe.getAllData("Flashcard");
+                        int cardCount=allFlashcards.getCount();
+                        if(cardCount==10)
+                        {
+                            helpMe.unlockBadge("Chcę więcej");
+                        }
+                        if(cardCount==20)
+                        {
+                            helpMe.unlockBadge("Dopiero się rozkręcam");
+                        }
+                        if(cardCount==30)
+                        {
+                            helpMe.unlockBadge("Ciągle mi mało");
+                        }
                         Toast.makeText(NewFlashcardActivity.this, "Dodano nową fiszkę", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(NewFlashcardActivity.this, "Nie udało się dodać fiszki", Toast.LENGTH_LONG).show();

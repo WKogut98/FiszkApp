@@ -46,6 +46,17 @@ public class HomeScreenActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         Cursor cursor = dbHelper.getAllData("user");
         cursor.moveToNext();
+        Cursor lastLesson = dbHelper.getLastLesson();
+        if(lastLesson.getCount()!=0)
+        {
+            lastLesson.moveToNext();
+            String lastLessonDate = lastLesson.getString(2);
+            textLastLesson.setText(lastLessonDate);
+        }
+        else
+        {
+            textLastLesson.setText("Nie przeprowadzono jeszcze lekcji!");
+        }
         //ustawienie poziomu na stronie głównej
         int level = cursor.getInt(3);
         int exp = cursor.getInt(2);

@@ -282,6 +282,20 @@ public class LessonActivity extends AppCompatActivity {
             Toast.makeText(LessonActivity.this, "Gratulacje! Awansowałe(a)ś na poziom "+level, Toast.LENGTH_LONG).show();
         }
         helper.updateData(String.valueOf(userId), "User", cv);
+        Cursor allLessons=helper.getAllData("Lesson");
+        int lessonCount=allLessons.getCount();
+        if(lessonCount==5)
+        {
+            helper.unlockBadge("Sumienny");
+        }
+        if(lessonCount==10)
+        {
+            helper.unlockBadge("Prymus");
+        }
+        if(lessonCount==20)
+        {
+            helper.unlockBadge("Ćwiczenie czyni mistrza");
+        }
         Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
         timer.cancel();
         finish();

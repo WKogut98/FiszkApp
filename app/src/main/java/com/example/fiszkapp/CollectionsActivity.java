@@ -108,6 +108,12 @@ public class CollectionsActivity extends AppCompatActivity {
                     boolean isInserted = helper.insertData(DBHelper.table_names[2], contentValues);
                     if (isInserted) {
                         adapter.swapCursor(cursor);
+                        Cursor allCollections=helper.getAllData("Collection");
+                        int colCount=allCollections.getCount();
+                        if(colCount==2)
+                        {
+                            helper.unlockBadge("Dywersyfikacja środków");
+                        }
                         Toast.makeText(CollectionsActivity.this, "Dodano nową kolekcję", Toast.LENGTH_LONG).show();
                         editTextCollectionName.setText("");
                     } else {
