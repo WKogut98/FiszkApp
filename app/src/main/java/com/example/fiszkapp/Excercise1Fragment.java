@@ -1,5 +1,7 @@
 package com.example.fiszkapp;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -24,17 +26,20 @@ public class Excercise1Fragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
     private static final String ARG_PARAM4 = "param4";
+    private static final String ARG_PARAM5 = "param5";
 
     // TODO: Rename and change types of parameters
     private String word;
     private String rightAnswer;
     private boolean isReversed;
     private String collectionName;
+    private int cardId;
     private String wrongAnswer;
     TextView textWord;
     Button buttonOption1;
     Button buttonOption2;
     DBHelper helper;
+    int priority;
 
     public Excercise1Fragment() {
         // Required empty public constructor
@@ -49,13 +54,14 @@ public class Excercise1Fragment extends Fragment {
      * @return A new instance of fragment Excercise1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Excercise1Fragment newInstance(String word, String rightAnswer, boolean isReversed, String collectionName) {
+    public static Excercise1Fragment newInstance(String word, String rightAnswer, boolean isReversed, String collectionName, int cardId) {
         Excercise1Fragment fragment = new Excercise1Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, word);
         args.putString(ARG_PARAM2, rightAnswer);
         args.putBoolean(ARG_PARAM3, isReversed);
         args.putString(ARG_PARAM4, collectionName);
+        args.putInt(ARG_PARAM5, cardId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +74,7 @@ public class Excercise1Fragment extends Fragment {
             rightAnswer = getArguments().getString(ARG_PARAM2);
             isReversed = getArguments().getBoolean(ARG_PARAM3);
             collectionName=getArguments().getString(ARG_PARAM4);
+            cardId=getArguments().getInt(ARG_PARAM5);
         }
     }
 
@@ -83,6 +90,9 @@ public class Excercise1Fragment extends Fragment {
         textWord.setText(word);
         wrongAnswer=helper.getWordsInRandomOrder(collectionName, isReversed, rightAnswer).get(0);
         setOptionWords();
+        Cursor c=helper.getElementFromAttribute("Flashcard", "ID", String.valueOf(cardId), false);
+        c.moveToNext();
+        priority=c.getInt(3);
         buttonOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,12 +131,17 @@ public class Excercise1Fragment extends Fragment {
         {
             chosenOption.setBackgroundColor(Color.GREEN);
             ((LessonActivity)getActivity()).answerList.add(true);
+            priority=(priority+1)*2;
         }
         else
         {
             chosenOption.setBackgroundColor(Color.RED);
             ((LessonActivity)getActivity()).answerList.add(false);
+            priority/=2;
         }
+        ContentValues values = new ContentValues();
+        values.put("PRIORITY",priority);
+        helper.updateData(String.valueOf(cardId), "Flashcard", values);
     }
     private boolean flipACoin()
     {

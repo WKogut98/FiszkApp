@@ -23,14 +23,17 @@ import java.util.List;
 public class LessonActivity extends AppCompatActivity {
 
     Bundle bundle; //dane z poprzedniej akt
+    int numberOfFlashcards;
     String front;
     String back;
+    int cardId;
     DBHelper helper;
     int currentIndex=0; //indeks do iterowania po fiszkach
     Button buttonNext;
     Button buttonEndLesson;
     TextView textTimer;
     ContentValues values;
+    List<FlashCard> flashCards;//zestaw fiszek
     SimpleDateFormat format; //format daty
     long timeLeft; //ile czasu zostalo
     boolean isLearning; //przegladamy czy robimy zadania
@@ -43,9 +46,9 @@ public class LessonActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         String colName= bundle.getString("collectionName");
         helper=new DBHelper(this);
-        List<FlashCard> flashCards = helper.getFlashcardsInCollection(colName);
+        flashCards = helper.getFlashcardsInCollection(colName);
         answerList=new ArrayList<>();
-        int numberOfFlashcards = flashCards.size();
+        numberOfFlashcards = flashCards.size();
 
         front = flashCards.get(currentIndex).getFront();
         back = flashCards.get(currentIndex).getBack();
@@ -98,6 +101,7 @@ public class LessonActivity extends AppCompatActivity {
                     {
                         front = flashCards.get(currentIndex).getFront();
                         back = flashCards.get(currentIndex).getBack();
+                        cardId = flashCards.get(currentIndex).id;
                         Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainerView);
                         if (fragment != null) {
                             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
@@ -120,64 +124,19 @@ public class LessonActivity extends AppCompatActivity {
                             fragmentManager.beginTransaction().
                                     setReorderingAllowed(true).
                                     add(R.id.fragmentContainerView, Excercise1Fragment.newInstance(word, answer, isReversed,
-                                            colName), null)
+                                            colName, cardId), null)
                                     .commit();
                         }
                         else
                         {
                             fragmentManager.beginTransaction().
                                     setReorderingAllowed(true).
-                                    add(R.id.fragmentContainerView, Excercise2Fragment.newInstance(word, answer), null)
+                                    add(R.id.fragmentContainerView, Excercise2Fragment.newInstance(word, answer, cardId), null)
                                     .commit();
                         }
                     }
                     else {
-                        int wrongAnswers=getWrongAnswersNumber();
-                        int rightAnswers=answerList.size()-wrongAnswers;
-                        String end=format.format(new Date());
-                        values=new ContentValues();
-                        values.put("ENDED", end);
-                        values.put("TOTAL_QUESTIONS", numberOfFlashcards);
-                        values.put("ANSWERS_CORRECT", rightAnswers);
-                        values.put("GAINED_EXP", getGainedXP());
-                        helper.updateData(String.valueOf(lessonId), "Lesson", values);
-                        if(wrongAnswers==0)
-                        {
-                            helper.unlockBadge("Mądra głowa");
-                        }
-                        Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
-                        helper.unlockBadge("Głodny wiedzy");
-                        Cursor user=helper.getAllData("User");
-                        user.moveToNext();
-                        int userId=user.getInt(0);
-                        int totalExp=user.getInt(2);
-                        int level=user.getInt(3);
-                        totalExp=Experience.addExp(totalExp, getGainedXP());
-                        ContentValues cv=new ContentValues();
-                        cv.put("EXPERIENCE", totalExp);
-                        if(totalExp>=5000)
-                        {
-                            helper.unlockBadge("Empiryk");
-                        }
-                        if(totalExp>=Experience.totalExpToGetLevel(level+1))
-                        {
-                            level++;
-                            if(level==2)
-                            {
-                                helper.unlockBadge("O, to tu są levele?!");
-                            }
-                            if(level==10)
-                            {
-                                helper.unlockBadge("Zahartowany w boju");
-                            }
-                            if(level==100)
-                            {
-                                helper.unlockBadge("Lvl 100 BOSS");
-                            }
-                            cv.put("LEVEL", level);
-                        }
-                        helper.updateData(String.valueOf(userId), "User", cv);
-                        finish();
+                        endLesson();
                     }
                 }
             }
@@ -201,10 +160,15 @@ public class LessonActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                //przejdź do ćwiczenia
-
-                //i zresetuj timer
-                resetTimer();
+                //zresetuj timer lub zakończ lekcję
+                if(isLearning)
+                {
+                    resetTimer();
+                }
+                else
+                {
+                    endLesson();
+                }
             }
         };
         timer.start();
@@ -251,7 +215,7 @@ public class LessonActivity extends AppCompatActivity {
     {
         int rightAnswers=answerList.size()-getWrongAnswersNumber();
         int xp=200*rightAnswers;
-        if(!answerList.contains(false))
+        if(!answerList.contains(false) && answerList.size()==numberOfFlashcards)
         {
             xp+=300; //bonus za brak złych odpowiedzi
         }
@@ -264,5 +228,55 @@ public class LessonActivity extends AppCompatActivity {
                 "Started", started, true);
         c.moveToNext();
         return c.getInt(0);
+    }
+    public void endLesson() //funkcja do kończenia lekcji
+    {
+        int wrongAnswers=getWrongAnswersNumber();
+        int rightAnswers=answerList.size()-wrongAnswers;
+        String end=format.format(new Date());
+        ContentValues cValues=new ContentValues();
+        cValues.put("ENDED", end);
+        cValues.put("TOTAL_QUESTIONS", numberOfFlashcards);
+        cValues.put("ANSWERS_CORRECT", rightAnswers);
+        cValues.put("GAINED_EXP", getGainedXP());
+        helper.updateData(String.valueOf(lessonId), "Lesson", cValues);
+        if(wrongAnswers==0)
+        {
+            helper.unlockBadge("Mądra głowa");
+        }
+        helper.unlockBadge("Głodny wiedzy");
+        Cursor user=helper.getAllData("User");
+        user.moveToNext();
+        int userId=user.getInt(0);
+        int totalExp=user.getInt(2);
+        int level=user.getInt(3);
+        totalExp=Experience.addExp(totalExp, getGainedXP());
+        ContentValues cv=new ContentValues();
+        cv.put("EXPERIENCE", totalExp);
+        if(totalExp>=5000)
+        {
+            helper.unlockBadge("Empiryk");
+        }
+        if(totalExp>=Experience.totalExpToGetLevel(level+1))
+        {
+            level++;
+            if(level==2)
+            {
+                helper.unlockBadge("O, to tu są levele?!");
+            }
+            if(level==10)
+            {
+                helper.unlockBadge("Zahartowany w boju");
+            }
+            if(level==100)
+            {
+                helper.unlockBadge("Lvl 100 BOSS");
+            }
+            cv.put("LEVEL", level);
+            Toast.makeText(LessonActivity.this, "Gratulacje! Awansowałe(a)ś na poziom "+level, Toast.LENGTH_LONG).show();
+        }
+        helper.updateData(String.valueOf(userId), "User", cv);
+        Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
