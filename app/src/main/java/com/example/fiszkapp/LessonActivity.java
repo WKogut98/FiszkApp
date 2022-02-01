@@ -1,16 +1,19 @@
 package com.example.fiszkapp;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -279,7 +282,7 @@ public class LessonActivity extends AppCompatActivity {
                 helper.unlockBadge("Lvl 100 BOSS");
             }
             cv.put("LEVEL", level);
-            Toast.makeText(LessonActivity.this, "Gratulacje! Awansowałe(a)ś na poziom "+level, Toast.LENGTH_LONG).show();
+            displayLvlUpDialog(level);
         }
         helper.updateData(String.valueOf(userId), "User", cv);
         Cursor allLessons=helper.getAllData("Lesson");
@@ -299,5 +302,19 @@ public class LessonActivity extends AppCompatActivity {
         Toast.makeText(LessonActivity.this, "Lekcja ukończona", Toast.LENGTH_SHORT).show();
         timer.cancel();
         finish();
+    }
+    public void displayLvlUpDialog(int level)
+    {
+        AlertDialog alertDialog=new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("GRATULACJE!");
+        alertDialog.setMessage("Awansowałeś na poziom " + String.valueOf(level));
+        alertDialog.setCancelable(false);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 }

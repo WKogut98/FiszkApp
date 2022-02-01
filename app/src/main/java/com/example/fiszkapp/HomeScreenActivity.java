@@ -23,6 +23,9 @@ public class HomeScreenActivity extends AppCompatActivity {
     Button buttonLessonHistory;
     Button buttonStartLesson;
     TextView textLastLesson;
+    DBHelper dbHelper;
+    Cursor cursor;
+    Cursor lastLesson;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,28 +45,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         username = args.getString("username");
         labelWelcome.setText(username);
 
-        //weź dane użytkownika
-        DBHelper dbHelper = new DBHelper(this);
-        Cursor cursor = dbHelper.getAllData("user");
-        cursor.moveToNext();
-        Cursor lastLesson = dbHelper.getLastLesson();
-        if(lastLesson.getCount()!=0)
-        {
-            lastLesson.moveToNext();
-            String lastLessonDate = lastLesson.getString(2);
-            textLastLesson.setText(lastLessonDate);
-        }
-        else
-        {
-            textLastLesson.setText("Nie przeprowadzono jeszcze lekcji!");
-        }
-        //ustawienie poziomu na stronie głównej
-        int level = cursor.getInt(3);
-        int exp = cursor.getInt(2);
-        textLevel.setText(String.valueOf(level));
-        int percentage = (int)((float)Experience.calculateExpFromCurrentLevel(exp,level)/Experience.calculateNeededExp(level)*100);
-        progressBarExp.setProgress(percentage);
-        textExp.setText("pozostało: "+ Experience.expToNextLevel(exp, level));
+        updateUI();
 
         buttonNewFlashcard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,5 +82,36 @@ public class HomeScreenActivity extends AppCompatActivity {
                 startActivityForResult(toBadges,0);
             }
         });
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        updateUI();
+    }
+    public void updateUI()
+    {
+        //pobierz dane o uzytkowniku i wyswietl w interfejsie
+        dbHelper = new DBHelper(this);
+        cursor = dbHelper.getAllData("user");
+        cursor.moveToNext();
+        lastLesson = dbHelper.getLastLesson();
+        if(lastLesson.getCount()!=0)
+        {
+            lastLesson.moveToNext();
+            String lastLessonDate = lastLesson.getString(2);
+            textLastLesson.setText(lastLessonDate);
+        }
+        else
+        {
+            textLastLesson.setText("Nie przeprowadzono jeszcze lekcji!");
+        }
+        //ustawienie poziomu na stronie głównej
+        int level = cursor.getInt(3);
+        int exp = cursor.getInt(2);
+        textLevel.setText(String.valueOf(level));
+        int percentage = (int)((float)Experience.calculateExpFromCurrentLevel(exp,level)/Experience.calculateNeededExp(level)*100);
+        progressBarExp.setProgress(percentage);
+        textExp.setText("pozostało: "+ Experience.expToNextLevel(exp, level));
     }
 }

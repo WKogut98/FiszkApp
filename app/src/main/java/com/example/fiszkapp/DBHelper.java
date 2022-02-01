@@ -116,7 +116,7 @@ public class DBHelper extends SQLiteOpenHelper
     public Cursor getLastLesson()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        return db.rawQuery("select * from Lesson order by ENDED desc limit 1",null);
+        return db.rawQuery("select * from Lesson order by ID desc limit 1",null);
     }
 
     public int getNumberOfFlashcardsInCollection(String collectionName)
